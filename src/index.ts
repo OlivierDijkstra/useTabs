@@ -4,12 +4,14 @@ type useTabsProps = {
   container: RefObject<HTMLElement>;
   defaultTab: RefObject<HTMLElement>;
   duration: number;
+  zIndex: number;
 };
 
 /**
  * @param {RefObject<HTMLElement>} container
  * @param {RefObject<HTMLElement>} defaultTab
  * @param {number} duration
+ * @param {number} zIndex
  *
  * @returns {[Function, Object]}
  */
@@ -17,6 +19,7 @@ export default function useTabs({
   container,
   defaultTab,
   duration = 150,
+  zIndex = 0,
 }: useTabsProps) {
   const DURATION = `${duration}ms`;
 
@@ -27,7 +30,7 @@ export default function useTabs({
     top: 0,
     transition: "transform 0s, opacity 0s",
     pointerEvents: "none",
-    zIndex: "-1",
+    zIndex,
     width: "0px",
     height: "0px",
     transform: "translate(0, 0)",
