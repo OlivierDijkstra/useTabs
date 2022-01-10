@@ -98,7 +98,7 @@ export default function Home() {
 | :-------- | :------- | :------------------------- |
 | `container` | `ref` | **Required**. Ref of your tab container |
 | `defaultTab` | `ref` | Ref of a tab you would like to set as the default highlighted tab |
-| `defaultTab` | `number` | Number to represent the amount of time in `ms` how long the animations should take |
+| `duration` | `number` | Number to represent the amount of time in `ms` how long the animations should take |
 
 ## Acknowledgements
  - [Emil Kowalksi](hhttps://github.com/emilkowalski)
