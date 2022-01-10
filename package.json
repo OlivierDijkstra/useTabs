@@ -1,6 +1,6 @@
 {
   "name": "@olivieralexander/usetabs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Reusable implementation of Emil Kowalskis smooth tab hover effect",
   "type": "module",
   "source": "src/index.ts",
