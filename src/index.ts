@@ -48,7 +48,7 @@ export default function useTabs({
     defaultTab ? true : false
   );
 
-  const [highlightStyles, setHightlightStyles] =
+  const [highlightStyles, setHighlightStyles] =
     useState<typeof DEFAULT_STYLES>(DEFAULT_STYLES);
 
   /**
@@ -60,7 +60,7 @@ export default function useTabs({
    *
    * @return  {void}
    */
-  function setHightlight(e) {
+  function setHighlight(e) {
     if (!e) {
       return;
     }
@@ -77,7 +77,7 @@ export default function useTabs({
     const transformDuration = isHoveredFromNull || initial ? "0ms" : DURATION;
     const opacityDuration = defaultTab ? "0ms" : DURATION;
 
-    setHightlightStyles({
+    setHighlightStyles({
       ...DEFAULT_STYLES,
       transition: `transform ${transformDuration}, opacity ${opacityDuration}`,
       width: `${tab.width}px`,
@@ -100,12 +100,12 @@ export default function useTabs({
 
   useEffect(() => {
     if (defaultTab?.current) {
-      setHightlight(defaultTab);
+      setHighlight(defaultTab);
     }
   }, []);
 
   return {
-    setHightlight,
+    setHighlight,
     highlightStyles,
   };
 }
