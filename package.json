@@ -1,5 +1,5 @@
 {
-  "name": "usetabs",
+  "name": "@olivieralexander/usetabs",
   "version": "0.0.1",
   "description": "Reusable implementation of Emil Kowalskis smooth tab hover effect",
   "type": "module",
