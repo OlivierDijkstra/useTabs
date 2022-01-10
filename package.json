@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "description": "Reusable implementation of Emil Kowalskis smooth tab hover effect",
   "type": "module",
-  "source": "src/index.js",
+  "source": "src/index.ts",
   "exports": {
     "require": "./dist/index.cjs",
     "default": "./dist/index.modern.js"
   },
   "main": "dist/index.js",
   "module": "dist/index.module.js",
+  "types": "dist/index.d.ts",
   "unpkg": "dist/index.umd.js",
   "scripts": {
     "build": "microbundle",
@@ -18,9 +19,10 @@
   "author": "Olivier Alexander",
   "license": "MIT",
   "devDependencies": {
+    "@types/react": "^17.0.38",
     "chokidar": "^3.5.2",
     "microbundle": "^0.14.2",
-    "ts-migrate": "^0.1.27"
+    "typescript": "^4.5.4"
   },
   "peerDependencies": {
     "react": "^17.0.0",
