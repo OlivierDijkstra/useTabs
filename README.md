@@ -7,6 +7,13 @@ Reusable way to create smooth tab highlights.
 
 ![Logo](https://raw.githubusercontent.com/OlivierDijkstra/useTabs/master/showcase.gif?token=GHSAT0AAAAAABQFJICGNLR6FU5P6KHCJYVGYO4HYNA)
 
+## Installation
+
+Install my-project with npm
+
+```bash
+  npm install @olivieralexander/usetabs
+```
 
 ## Usage/Examples
 
@@ -88,7 +95,6 @@ export default function Home() {
   );
 }
 ```
-
 
 ## API Reference
 
