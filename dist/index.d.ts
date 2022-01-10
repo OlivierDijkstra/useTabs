@@ -3,16 +3,18 @@ declare type useTabsProps = {
     container: RefObject<HTMLElement>;
     defaultTab: RefObject<HTMLElement>;
     duration: number;
+    zIndex: number;
 };
 /**
  * @param {RefObject<HTMLElement>} container
  * @param {RefObject<HTMLElement>} defaultTab
  * @param {number} duration
+ * @param {number} zIndex
  *
  * @returns {[Function, Object]}
  */
-export default function useTabs({ container, defaultTab, duration, }: useTabsProps): {
-    setHightlight: (e: any) => void;
+export default function useTabs({ container, defaultTab, duration, zIndex, }: useTabsProps): {
+    setHighlight: (e: any) => void;
     highlightStyles: {
         opacity: number;
         position: string;
@@ -20,7 +22,7 @@ export default function useTabs({ container, defaultTab, duration, }: useTabsPro
         top: number;
         transition: string;
         pointerEvents: string;
-        zIndex: string;
+        zIndex: number;
         width: string;
         height: string;
         transform: string;
