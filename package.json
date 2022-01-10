@@ -1,0 +1,30 @@
+{
+  "name": "usetabs",
+  "version": "0.0.1",
+  "description": "Reusable implementation of Emil Kowalskis smooth tab hover effect",
+  "type": "module",
+  "source": "src/index.js",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "unpkg": "dist/index.umd.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch"
+  },
+  "author": "Olivier Alexander",
+  "license": "MIT",
+  "devDependencies": {
+    "chokidar": "^3.5.2",
+    "microbundle": "^0.14.2",
+    "ts-migrate": "^0.1.27"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "dependencies": {}
+}
