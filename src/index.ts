@@ -1,6 +1,23 @@
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 
-export default function useTabs({ container, defaultTab, duration = 150 }) {
+type useTabsProps = {
+  container: RefObject<HTMLElement>;
+  defaultTab: RefObject<HTMLElement>;
+  duration: number;
+};
+
+/**
+ * @param {RefObject<HTMLElement>} container
+ * @param {RefObject<HTMLElement>} defaultTab
+ * @param {number} duration
+ *
+ * @returns {[Function, Object]}
+ */
+export default function useTabs({
+  container,
+  defaultTab,
+  duration = 150,
+}: useTabsProps) {
   const DURATION = `${duration}ms`;
 
   const DEFAULT_STYLES = {
@@ -8,22 +25,38 @@ export default function useTabs({ container, defaultTab, duration = 150 }) {
     position: "absolute",
     left: 0,
     top: 0,
+    transition: "transform 0s, opacity 0s",
     pointerEvents: "none",
     zIndex: "-1",
+    width: "0px",
+    height: "0px",
+    transform: "translate(0, 0)",
   };
 
-  const [activeTab, setActiveTab] = useState(defaultTab);
-  const [initial, setInitial] = useState(defaultTab);
-  const [tabBoundingBox, setTabBoundingBox] = useState(
+  const [activeTab, setActiveTab] = useState<RefObject<HTMLElement> | null>(
+    defaultTab
+  );
+  const [initial, setInitial] = useState<boolean>(defaultTab ? true : false);
+  const [tabBoundingBox, setTabBoundingBox] = useState<DOMRect | null>(
     defaultTab?.current?.getBoundingClientRect() || null
   );
   const [wrapperBoundingBox, setWrapperBoundingBox] = useState(null);
-  const [isHoveredFromNull, setIsHoveredFromNull] = useState(
+  const [isHoveredFromNull, setIsHoveredFromNull] = useState<boolean>(
     defaultTab ? true : false
   );
 
-  const [highlightStyles, setHightlightStyles] = useState(DEFAULT_STYLES);
+  const [highlightStyles, setHightlightStyles] =
+    useState<typeof DEFAULT_STYLES>(DEFAULT_STYLES);
 
+  /**
+   * Highlights a tab and updates the highlightStyles.
+   * This should be called when the user hovers over a tab.
+   * e.g: onMouseEnter={setHighlight}
+   *
+   * @param   {MouseEvent}  e  onMouseEnter event
+   *
+   * @return  {void}
+   */
   function setHightlight(e) {
     if (!e) {
       return;
