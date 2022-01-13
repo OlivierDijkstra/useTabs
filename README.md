@@ -22,7 +22,7 @@ To get started you will need a couple things:
 * A container element with a ref and position relative that will wrap your tabs.
 
 useTabs will return 2 things:
-* `setHightlight()`: function to trigger the hightlight
+* `setHightlight(ref | e)`: function to trigger the hightlight, takes either a react ref or event. 
 * `hightlightStyles`: object containing styles that will need to be applied on your highlight element.
 
 #### Note: These examples use TailwindCSS but you're free to use any styling library you want.
