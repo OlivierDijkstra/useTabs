@@ -62,7 +62,7 @@ export default function useTabs({
    */
   function setHighlight(e) {
     if (!e) {
-      return;
+      return setActiveTab(null);
     }
 
     const target = e?.target || e?.current;
@@ -97,6 +97,12 @@ export default function useTabs({
       updateHightlightStyles(tabBoundingBox, wrapperBoundingBox);
     }
   }, [tabBoundingBox, wrapperBoundingBox]);
+
+  useEffect(() => {
+    if (!activeTab) {
+      setHighlightStyles(DEFAULT_STYLES);
+    }
+  }, [activeTab]);
 
   useEffect(() => {
     if (defaultTab?.current) {
