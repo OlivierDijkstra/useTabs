@@ -1,0 +1,33 @@
+{
+  "name": "@olivieralexander/usetabs",
+  "version": "0.0.5",
+  "description": "Reusable implementation of Emil Kowalskis smooth tab hover effect",
+  "author": "Olivier Alexander",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "check-types": "tsc --noemit",
+    "lint": "eslint \"src/**/*.ts*\""
+  },
+  "peerdependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "*",
+    "react": "^18.0.33",
+    "tsconfig": "*",
+    "tsup": "^6.7.0",
+    "typescript": "^4.5.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

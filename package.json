@@ -1,33 +1,22 @@
 {
-  "name": "@olivieralexander/usetabs",
-  "version": "0.0.5",
-  "description": "Reusable implementation of Emil Kowalskis smooth tab hover effect",
-  "type": "module",
-  "source": "src/index.ts",
-  "exports": {
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.modern.js"
-  },
-  "main": "dist/index.js",
-  "module": "dist/index.module.js",
-  "types": "dist/index.d.ts",
-  "unpkg": "dist/index.umd.js",
+  "name": "usetabs-repo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "build": "microbundle",
-    "dev": "microbundle watch"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "author": "Olivier Alexander",
-  "license": "MIT",
-  "private": false,
   "devDependencies": {
-    "@types/react": "^17.0.38",
-    "chokidar": "^3.5.2",
-    "microbundle": "^0.14.2",
-    "typescript": "^4.5.4"
+    "eslint": "^8.0.0",
+    "eslint-config-custom": "*",
+    "prettier": "^2.8.0",
+    "turbo": "latest"
   },
-  "peerDependencies": {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
-  },
-  "dependencies": {}
+  "packageManager": "yarn@1.22.19"
 }
