@@ -7,6 +7,7 @@ export default function Home() {
 
   const { setHighlight, highlightStyles } = useTabs({
     container: containerRef,
+    // duration: 150,
     // defaultTab: defaultRef,
   });
 
@@ -27,20 +28,22 @@ export default function Home() {
 
   return (
     <main className="w-screen h-screen grid place-items-center">
-      <ul className="w-[50%] flex justify-between relative" ref={containerRef}>
+      <div className="w-[50%] flex flex-col gap-2 md:flex-row justify-between relative" ref={containerRef} onMouseLeave={() => setHighlight(null)}>
         {tabs.map((tab, i) => (
-          <li
+          <button
             key={tab.id}
             className="py-2 px-8 border rounded cursor-pointer"
             ref={i === 1 ? defaultRef : null}
             onMouseEnter={setHighlight}
+            onFocus={setHighlight}
+            tabIndex={0}
           >
             {tab.name}
-          </li>
+          </button>
         ))}
 
         <div style={highlightStyles} className="bg-white bg-opacity-25" />
-      </ul>
+      </div>
     </main>
   );
 }

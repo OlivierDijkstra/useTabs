@@ -1,4 +1,4 @@
-import { CSSProperties, MouseEvent, RefObject, useEffect, useState } from 'react';
+import { CSSProperties, FocusEvent, MouseEvent, RefObject, useEffect, useState } from 'react';
 
 type useTabsProps = {
   container: RefObject<HTMLElement>;
@@ -20,8 +20,10 @@ type HighlightStyles = {
   transform: string;
 } & CSSProperties;
 
+type SetHighlightProperties = MouseEvent<HTMLElement> | FocusEvent<HTMLElement> | RefObject<HTMLElement>;
+
 type UseTabsResult = {
-  setHighlight: (e: MouseEvent) => void;
+  setHighlight: (e: SetHighlightProperties) => void;
   highlightStyles: HighlightStyles;
 };
 
@@ -33,7 +35,7 @@ export default function useTabs({ container, defaultTab, duration = 150, zIndex 
     position: 'absolute',
     left: 0,
     top: 0,
-    transition: 'transform 0s, opacity 0s',
+    transition: `transform 0s, opacity ${DURATION}`,
     pointerEvents: 'none',
     zIndex,
     width: '0px',
@@ -41,43 +43,46 @@ export default function useTabs({ container, defaultTab, duration = 150, zIndex 
     transform: 'translate(0, 0)',
   };
 
-  const [activeTab, setActiveTab] = useState<RefObject<HTMLElement> | HTMLElement | undefined>(defaultTab);
-  const [initial, setInitial] = useState<boolean>(Boolean(!defaultTab));
-  const [isHoveredFromNull, setIsHoveredFromNull] = useState<boolean>(Boolean(defaultTab));
-
+  const [highlightTimeout, setHighlightTimeout] = useState<NodeJS.Timer | null>(null);
   const [highlightStyles, setHighlightStyles] = useState<typeof DEFAULT_STYLES>(DEFAULT_STYLES);
 
   /**
    * Highlights a tab and updates the highlightStyles.
-   * This should be called when the user hovers over a tab.
-   * e.g: onMouseEnter={setHighlight}
+   * This should be called when the user hovers or focuses a tab.
+   * e.g: onMouseEnter={setHighlight}, onFocus={setHighlight}
+   * 
+   * Make sure to also set a onMouseLeave on your container element to reset the highlight
+   * e.g: onMouseLeave={() => setHighlight(null)} 
    */
-  function setHighlight(e: MouseEvent | RefObject<HTMLElement> | null): void {
+  function setHighlight(e: SetHighlightProperties | null): void {
     const target = ((e as MouseEvent)?.currentTarget || (e as RefObject<HTMLElement>)?.current) as HTMLElement;
 
-    if (!container.current || !target) {
-      setActiveTab(undefined);
-      setIsHoveredFromNull(true);
-      setHighlightStyles(DEFAULT_STYLES);
+    if (!e || !container.current) {
+      if (highlightTimeout) clearTimeout(highlightTimeout);
+      setHighlightTimeout(null);
+      setHighlightStyles({
+        ...highlightStyles,
+        opacity: 0,
+      });
       return;
     }
 
     const tabRect = target.getBoundingClientRect();
     const wrapperRect = container.current.getBoundingClientRect();
-    setIsHoveredFromNull(!activeTab);
-    setActiveTab(target);
     updateHightlightStyles(tabRect, wrapperRect);
   }
 
   function updateHightlightStyles(tab: DOMRect, wrapper: DOMRect) {
-    const transformDuration = isHoveredFromNull || initial ? '0ms' : DURATION;
-    const opacityDuration = defaultTab ? '0ms' : DURATION;
+    const transformDuration = !highlightTimeout ? '0ms' : DURATION;
 
-    console.log('🔥');
+    if (highlightTimeout) {
+      clearTimeout(highlightTimeout);
+      setHighlightTimeout(null);
+    }
 
     const newStyles = {
       ...DEFAULT_STYLES,
-      transition: `transform ${transformDuration}, opacity ${opacityDuration}`,
+      transition: `transform ${transformDuration}, opacity ${DURATION}`,
       width: `${tab.width}px`,
       height: `${tab.height}px`,
       opacity: 1,
@@ -89,14 +94,14 @@ export default function useTabs({ container, defaultTab, duration = 150, zIndex 
 
     setHighlightStyles(newStyles);
 
-    setInitial(false);
-
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setHighlightStyles({
         ...newStyles,
         transition: `transform ${DURATION}, opacity ${DURATION}`,
       });
     }, duration);
+
+    setHighlightTimeout(timeout);
   }
 
   useEffect(() => {
