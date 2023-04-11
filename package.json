@@ -16,7 +16,7 @@
     "eslint": "^8.0.0",
     "eslint-config-custom": "*",
     "prettier": "^2.8.0",
-    "turbo": "latest"
+    "turbo": "^1.8.8"
   },
   "packageManager": "yarn@1.22.19"
 }
