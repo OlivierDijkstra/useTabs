@@ -1,6 +1,6 @@
 {
   "name": "@olivieralexander/usetabs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Reusable implementation of Emil Kowalskis smooth tab hover effect",
   "author": "Olivier Alexander",
   "types": "./dist/index.mjs",
