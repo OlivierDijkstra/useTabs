@@ -4,15 +4,26 @@
 Reusable way to create smooth tab highlights.
 
 
-
 ![Logo](https://raw.githubusercontent.com/OlivierDijkstra/useTabs/master/showcase.gif?token=GHSAT0AAAAAABQFJICGNLR6FU5P6KHCJYVGYO4HYNA)
 
 ## Installation
 
-Install my-project with npm
+Install with npm
 
 ```bash
   npm install @olivieralexander/usetabs
+```
+
+Yarn
+  
+```bash
+  yarn add @olivieralexander/usetabs
+```
+
+Pnpm
+
+```bash
+  pnpm add @olivieralexander/usetabs
 ```
 
 ## Usage/Examples
@@ -22,30 +33,36 @@ To get started you will need a couple things:
 * A container element with a ref and position relative that will wrap your tabs.
 
 useTabs will return 2 things:
-* `setHightlight(ref | e)`: function to trigger the hightlight, takes either a react ref or event. 
+* `setHightlight(ref | e)`: function to trigger the hightlight, takes either a react ref, focus or mouseEnter event. 
 * `hightlightStyles`: object containing styles that will need to be applied on your highlight element.
 
 #### Note: These examples use TailwindCSS but you're free to use any styling library you want.
 
 ### setHightlight
 ```javascript
-<li onMouseEnter={setHightlight}>
+<li onMouseEnter={setHightlight} onFocus={setHighlight}>
     Tab 1
 </li>
+```
+
+It is also advised to add a `onMouseLeave` event on the container to hide the highlight when the user finished hovering.
+
+```javascript
+<div className="container" ref={containerRef} onMouseLeave={() => setHighlight(null)} />
 ```
 
 ### hightlightStyles
 ```javascript
 <div
-style={highlightStyles}
-className="bg-gray-500 bg-opacity-10 rounded-sm"
+  style={highlightStyles}
+  className="bg-gray-500 bg-opacity-10 rounded-sm"
 />
 ```
 
 ### Full Example:
 ```javascript
 import { useRef } from "react";
-import useTabs from "../hooks/useTabs";
+import useTabs from "@olivieralexander/usetabs";
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -74,7 +91,7 @@ export default function Home() {
 
   return (
     <main className="w-screen h-screen grid place-items-center">
-      <ul className="w-[50%] flex justify-between relative" ref={containerRef}>
+      <ul className="w-[50%] flex md:flex-row gap-2 justify-between relative" ref={containerRef}>
         {tabs.map((tab, i) => (
           <li
             key={tab.id}

@@ -55,7 +55,7 @@ export default function useTabs({ container, defaultTab, duration = 150, zIndex 
    * e.g: onMouseLeave={() => setHighlight(null)} 
    */
   function setHighlight(e: SetHighlightProperties | null): void {
-    const target = ((e as MouseEvent)?.currentTarget || (e as RefObject<HTMLElement>)?.current) as HTMLElement;
+    const target = (Boolean((e as MouseEvent)?.currentTarget) || (e as RefObject<HTMLElement>)?.current) as HTMLElement;
 
     if (!e || !container.current) {
       if (highlightTimeout) clearTimeout(highlightTimeout);
@@ -72,7 +72,7 @@ export default function useTabs({ container, defaultTab, duration = 150, zIndex 
     updateHightlightStyles(tabRect, wrapperRect);
   }
 
-  function updateHightlightStyles(tab: DOMRect, wrapper: DOMRect) {
+  function updateHightlightStyles(tab: DOMRect, wrapper: DOMRect): void {
     const transformDuration = !highlightTimeout ? '0ms' : DURATION;
 
     if (highlightTimeout) {

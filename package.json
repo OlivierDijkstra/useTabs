@@ -1,22 +1,37 @@
 {
-  "name": "usetabs-repo",
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "name": "@olivieralexander/usetabs",
+  "version": "0.0.5",
+  "description": "Reusable implementation of Emil Kowalskis smooth tab hover effect",
+  "author": "Olivier Alexander",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist"
+  },
+  "license": "MIT",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "clean": "turbo run clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "check-types": "tsc --noemit"
+  },
+  "peerdependencies": {
+    "react": "^18.2.0"
   },
   "devDependencies": {
-    "eslint": "^8.0.0",
-    "eslint-config-custom": "*",
-    "prettier": "^2.8.0",
-    "turbo": "^1.9.0"
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "react": "^18.0.33",
+    "tsup": "^6.7.0",
+    "typescript": "*"
   },
-  "packageManager": "yarn@1.22.19"
+  "publishConfig": {
+    "access": "public"
+  }
 }
