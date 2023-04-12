@@ -11,7 +11,8 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "check-types": "tsc --noemit"
+    "check-types": "tsc --noemit",
+    "release": "build && release-it"
   },
   "peerdependencies": {
     "react": "^18.2.0"
@@ -28,10 +29,16 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.32.2",
     "react": "^18.0.33",
+    "release-it": "^15.10.1",
     "tsup": "^6.7.0",
     "typescript": "*"
   },
   "publishConfig": {
-    "access": "public"
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "github": {
+      "release": true
+    }
   }
 }
