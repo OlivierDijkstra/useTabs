@@ -3,10 +3,11 @@
   "version": "1.0.1",
   "description": "Reusable implementation of Emil Kowalskis smooth tab hover effect",
   "author": "Olivier Alexander",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.mjs",
   "files": [
-    "dist"
+    "dist/**"
   ],
+  "main": "dist/index.ts",
   "exports": {
     ".": "./dist"
   },
